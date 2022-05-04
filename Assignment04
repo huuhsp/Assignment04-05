@@ -1,0 +1,54 @@
+#include <iostream>
+using namespace std;
+
+int* get_even_num(int* p_arr1, int* p_size);
+
+int main()
+{
+	int i_loop=20;
+	while(i_loop)
+    {
+	//nhap size cua mang
+	cout << "nhap kich thuoc cua mang: ";
+	int i_size; cin >> i_size;
+    //nhap gia tri cua mang
+    cout << "nhap cac gia tri cua mang: ";
+	int* p_arr1 = new int[i_size+1];
+	p_arr1[0] = i_size;
+	for(int i=1;i<=i_size;i++)
+		cin>>p_arr1[i];
+	
+    //tim cac so chan trong mang va in ra
+	int* p_size;	
+	int* p_arr2 = get_even_num(p_arr1, p_size);
+	p_size = &p_arr2[0];
+	
+	cout << "cac so chan co trong mang la: ";
+	for(int i=1;i<=*p_size;i++)
+		cout << p_arr2[i] << " ";
+
+	delete[] p_arr1;
+	delete[] p_arr2;
+    i_loop--;
+    cout << "\n\n";
+    }
+}
+
+int* get_even_num(int* p_arr1, int* p_size)
+{
+	int count=0,k=1;
+	for(int i=1;i<=p_arr1[0];i++)
+		if(p_arr1[i]%2==0)
+			count++;
+	p_size = &count;
+	
+	int* p_arr2 = new int[*p_size];
+	for(int i=1;i<=p_arr1[0];i++)
+		if(p_arr1[i]%2==0)
+		{
+			p_arr2[k] = p_arr1[i]; 
+			k++;
+		}
+	p_arr2[0] = *p_size;
+	return p_arr2;
+}
